@@ -1,0 +1,29 @@
+import express from 'express'
+import authController from './controllers/authController'
+import dashboardController from './controllers/dashboardController'
+import authMiddleware from './middlewares/auth'
+import guestMiddleware from './middlewares/guest'
+import errorHandleMiddleware from './middlewares/errorHandle'
+
+const routes = express.Router()
+
+routes.use((req, res, next) => {
+  res.locals.flashSuccess = req.flash('success')
+  res.locals.flashError = req.flash('error')
+  next()
+})
+
+routes.get('/', guestMiddleware, authController.signin)
+routes.get('/signup', guestMiddleware, authController.signup)
+routes.get('/signout', authController.signout)
+routes.post('/register', authController.register)
+routes.post('/authenticate', authController.authenticate)
+
+routes.use('/app', authMiddleware)
+routes.get('/app/dashboard', dashboardController.index)
+
+routes.use((req, res) => res.render('errors/404'))
+routes.use(errorHandleMiddleware)
+
+export default routes
+

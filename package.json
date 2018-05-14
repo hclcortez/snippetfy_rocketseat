@@ -1,0 +1,38 @@
+{
+  "name": "snippetfy_rocketseat",
+  "version": "1.0.0",
+  "description": "First project of the GoNode, a node curse, at Rocketseat",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon index -e js,json,njk --exec babel-node",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "node",
+    "GoNode"
+  ],
+  "author": "Hover Cortez Leite <hclcortez@gmail.com>",
+  "license": "ISC",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "body-parser": "^1.18.2",
+    "connect-flash": "^0.1.1",
+    "connect-session-sequelize": "^5.2.1",
+    "dotenv": "^5.0.1",
+    "express": "^4.16.3",
+    "express-session": "^1.15.6",
+    "mysql2": "^1.5.3",
+    "nunjucks": "^3.1.2",
+    "sequelize": "^4.37.7"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-plugin-transform-object-rest-spread": "^6.26.0",
+    "babel-preset-env": "^1.7.0",
+    "eslint": "^4.19.1",
+    "eslint-config-airbnb-base": "^12.1.0",
+    "eslint-plugin-import": "^2.11.0",
+    "nodemon": "^1.17.4",
+    "sequelize-cli": "^4.0.0"
+  }
+}
