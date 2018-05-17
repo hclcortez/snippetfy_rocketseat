@@ -3,8 +3,7 @@ const category = (sequelize, DataTypes) => {
     title: DataTypes.STRING,
   })
 
-  Category.associete = (models) => {
-    Category.belongsTo(models.User)
+  Category.associate = (models) => {
     Category.hasMany(models.Snippet)
   }
 
