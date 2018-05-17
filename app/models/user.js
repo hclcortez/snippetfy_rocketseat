@@ -5,6 +5,10 @@ const user = (sequelize, DataTypes) => {
     password: DataTypes.STRING,
   })
 
+  User.associete = (models) => {
+    User.hasMany(models.Category)
+  }
+
   return User
 }
 
