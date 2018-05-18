@@ -1,4 +1,4 @@
-import { Category } from '../models'
+import { Category, Snippet } from '../models'
 
 const store = async (req, res, next) => {
   try {
@@ -13,5 +13,28 @@ const store = async (req, res, next) => {
   }
 }
 
+const show = async (req, res, next) => {
+  try {
+    const categories = await Category.findAll({
+      where: {
+        UserId: req.session.user.id,
+      },
+      include: [Snippet],
+    })
 
-export default { store }
+    const snippets = await Snippet.findAll({
+      where: { CategoryId: req.params.id },
+    })
+
+    return res.render('categories/show', {
+      categories,
+      snippets,
+      categoryId: req.params.id,
+    })
+  } catch (err) {
+    return next(err)
+  }
+}
+
+
+export default { store, show }
