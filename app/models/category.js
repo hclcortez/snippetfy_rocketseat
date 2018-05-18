@@ -4,6 +4,7 @@ const category = (sequelize, DataTypes) => {
   })
 
   Category.associate = (models) => {
+    Category.belongsTo(models.User)
     Category.hasMany(models.Snippet)
   }
 

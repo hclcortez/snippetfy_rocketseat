@@ -4,6 +4,7 @@ import dashboardController from './controllers/dashboardController'
 import authMiddleware from './middlewares/auth'
 import guestMiddleware from './middlewares/guest'
 import errorHandleMiddleware from './middlewares/errorHandle'
+import categoryController from './controllers/categoryController'
 
 const routes = express.Router()
 
@@ -13,14 +14,29 @@ routes.use((req, res, next) => {
   next()
 })
 
+/**
+* Auth
+*/
+
 routes.get('/', guestMiddleware, authController.signin)
 routes.get('/signup', guestMiddleware, authController.signup)
 routes.get('/signout', authController.signout)
+
 routes.post('/register', authController.register)
 routes.post('/authenticate', authController.authenticate)
 
+/**
+* Dashborad
+*/
+
 routes.use('/app', authMiddleware)
 routes.get('/app/dashboard', dashboardController.index)
+
+/**
+ * Categories
+ */
+
+routes.post('/app/categories/create', categoryController.store)
 
 routes.use((req, res) => res.render('errors/404'))
 routes.use(errorHandleMiddleware)
