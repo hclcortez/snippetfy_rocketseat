@@ -5,6 +5,7 @@ import authMiddleware from './middlewares/auth'
 import guestMiddleware from './middlewares/guest'
 import errorHandleMiddleware from './middlewares/errorHandle'
 import categoryController from './controllers/categoryController'
+import snippetController from './controllers/snippetController'
 
 const routes = express.Router()
 
@@ -38,6 +39,12 @@ routes.get('/app/dashboard', dashboardController.index)
 
 routes.get('/app/categories/:id', categoryController.show)
 routes.post('/app/categories/create', categoryController.store)
+
+/**
+ * Snippets
+ */
+
+routes.post('/app/categories/:categoryId/snippets/create', snippetController.store)
 
 routes.use((req, res) => res.render('errors/404'))
 routes.use(errorHandleMiddleware)
