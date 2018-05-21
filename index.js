@@ -5,6 +5,7 @@ import path from 'path'
 import dotenv from 'dotenv'
 import flash from 'connect-flash'
 import session from 'express-session'
+import methodOverride from 'method-override'
 
 import sessionConfig from './config/session'
 
@@ -28,5 +29,6 @@ app.set('view engine', 'njk')
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(flash())
 app.use(session(sessionConfig))
+app.use(methodOverride('_method'))
 app.use('/', routes)
 app.listen(PORT, () => console.log('Server is running'))

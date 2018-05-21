@@ -43,4 +43,17 @@ const show = async (req, res, next) => {
   }
 }
 
-export default { store, show }
+const update = async (req, res, next) => {
+  try {
+    const snippet = await Snippet.findById(req.params.id)
+
+    await snippet.update(req.body)
+
+    req.flash('sucess', 'Snippet atualizado com sucesso')
+    return res.redirect(`/app/categories/${req.params.categoryId}/snippets/${snippet.id}`)
+  } catch (error) {
+    return next(error)
+  }
+}
+
+export default { store, show, update }
