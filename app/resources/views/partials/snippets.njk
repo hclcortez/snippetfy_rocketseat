@@ -1,0 +1,25 @@
+<section class="snippets-list">
+    <div class="list-header">
+      <a href="#" data-modal-open="#new-snippet">NOVO SNIPPET</a>
+    </div>
+
+     {% for snippet in snippets %}
+      <a href="/app/categories/{{categoryId}}/snippets/{{snippet.id}}">
+        <strong>{{snippet.title}}</strong>
+        <p>{{snippet.excerpt}}</p>
+      </a>
+     {% endfor %}
+
+    <div class="modal" id="new-snippet">
+      <form class="modal-content" method="POST" action="/app/categories/{{categoryId}}/snippets/create">
+        <input type="text" name="title" placeholder="Titulo do Snippet">
+        <div class="content-container">
+          <textarea class="mde" name="content" id="" cols="30" rows="10" placeholder="Conteúdo do Snippet"></textarea>
+        </div>
+        <button type="submit">SALVAR SNIPPET</button>
+        <a href="#" data-modal-close="#new-snippet">CANCELAR</a>
+      </form>
+    <div>
+</section>
+
+
