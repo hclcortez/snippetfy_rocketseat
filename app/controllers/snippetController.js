@@ -49,11 +49,26 @@ const update = async (req, res, next) => {
 
     await snippet.update(req.body)
 
-    req.flash('sucess', 'Snippet atualizado com sucesso')
+    req.flash('success', 'Snippet atualizado com sucesso')
     return res.redirect(`/app/categories/${req.params.categoryId}/snippets/${snippet.id}`)
   } catch (error) {
     return next(error)
   }
 }
 
-export default { store, show, update }
+const destroy = async (req, res, next) => {
+  try {
+    await Snippet.destroy({ where: { id: req.params.id } })
+    req.flash('success', 'Snippet deletado com sucesso')
+    return res.redirect(`/app/categories/${req.params.categoryId}`)
+  } catch (error) {
+    return next(error)
+  }
+}
+
+export default {
+  store,
+  show,
+  update,
+  destroy,
+}
